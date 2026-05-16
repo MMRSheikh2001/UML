@@ -1,0 +1,260 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Mahbub Rahman",
+      "email": "mahbub@workbridge.com",
+      "password": "password123",
+      "phone": "01712345678",
+      "city": "Dhaka",
+      "area": "Gulshan",
+      "profileImage": "https://i.pravatar.cc/150?u=mahbub",
+      "isVerified": true,
+      "status": "active",
+      "isDeleted": false,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "role": "user",
+      "isSuperAdmin": false,
+      "tagline": "Senior Angular Developer & Frontend Architect",
+      "bio": "Building high-performance web applications with Angular for 5+ years. Expert in RxJS, NgRx, and scalable frontend architectures."
+    },
+    {
+      "id": "2",
+      "name": "Sabbir Hossain",
+      "email": "admin@workbridge.com",
+      "password": "admin123",
+      "phone": "01900000000",
+      "city": "Dhaka",
+      "area": "Motijheel",
+      "profileImage": "https://i.pravatar.cc/150?u=sabbir",
+      "isVerified": true,
+      "status": "active",
+      "isDeleted": false,
+      "createdAt": "2024-01-01T00:00:00Z",
+      "role": "admin",
+      "isSuperAdmin": true
+    },
+    {
+      "id": "3",
+      "name": "Tanvir Ahmed",
+      "email": "tanvir@corp.com",
+      "password": "password123",
+      "phone": "01811112222",
+      "city": "Chittagong",
+      "area": "Agrabad",
+      "profileImage": "https://i.pravatar.cc/150?u=tanvir",
+      "isVerified": true,
+      "status": "active",
+      "isDeleted": false,
+      "createdAt": "2024-02-15T10:30:00Z",
+      "role": "user",
+      "isSuperAdmin": false,
+      "tagline": "CEO at TechSolutions BD"
+    },
+    {
+      "id": "4",
+      "name": "Rehana Parvin",
+      "email": "rehana@creative.com",
+      "password": "password123",
+      "phone": "01655554444",
+      "city": "Dhaka",
+      "area": "Dhanmondi",
+      "profileImage": "https://i.pravatar.cc/150?u=rehana",
+      "isVerified": true,
+      "status": "active",
+      "isDeleted": false,
+      "createdAt": "2024-03-10T14:20:00Z",
+      "role": "user",
+      "isSuperAdmin": false,
+      "tagline": "Creative Graphic Designer & UI/UX Expert"
+    },
+    {
+      "id": "5",
+      "name": "Badrul Islam",
+      "email": "badrul@gmail.com",
+      "password": "password123",
+      "phone": "01511110000",
+      "city": "Sylhet",
+      "area": "Zindabazar",
+      "profileImage": "https://i.pravatar.cc/150?u=badrul",
+      "isVerified": false,
+      "status": "active",
+      "isDeleted": false,
+      "createdAt": "2024-05-01T09:00:00Z",
+      "role": "user",
+      "isSuperAdmin": false
+    }
+  ],
+  "resumes": [
+    {
+      "id": "r1",
+      "userId": "1",
+      "summary": "Highly skilled Senior Angular Developer with 5+ years of experience in enterprise applications.",
+      "education": "BSc in CSE, BUET",
+      "experience": "Senior Frontend Developer at DataSoft Systems",
+      "careerObjective": "To lead frontend innovation and build scalable web architectures.",
+      "resumeHeadline": "Senior Angular Developer | Frontend Architect",
+      "profileCompletion": 100,
+      "cvVisibility": "Public",
+      "educations": [
+        { "id": "e1", "degree": "BSc in CSE", "institute": "BUET", "passingYear": 2020, "result": "3.85/4.00" }
+      ],
+      "experiences": [
+        { "id": "ex1", "companyName": "DataSoft", "designation": "Senior Developer", "employmentPeriod": "2021 - Present", "currentlyWorking": true }
+      ],
+      "skillEntries": [
+        { "id": "s1", "skillName": "Angular", "skillLevel": "Expert", "yearsOfExperience": 5 },
+        { "id": "s2", "skillName": "TypeScript", "skillLevel": "Expert", "yearsOfExperience": 6 }
+      ],
+      "projects": [
+        { "id": "p1", "projectName": "WorkBridge", "technologies": "Angular, JSON Server", "description": "Job portal project." }
+      ],
+      "certificationList": [],
+      "trainings": [],
+      "languagesKnown": ["English", "Bengali"]
+    }
+  ],
+  "jobs": [
+    {
+      "id": "j1",
+      "employerId": "3",
+      "title": "Senior Angular Developer",
+      "companyName": "TechSolutions BD",
+      "companyLogo": "https://picsum.photos/seed/tech/100/100",
+      "description": "We are seeking an experienced Senior Angular Developer to join our dynamic team.",
+      "city": "Dhaka",
+      "area": "Mohakhali",
+      "salaryMin": 80000,
+      "salaryMax": 150000,
+      "jobType": "full-time",
+      "experienceRequired": "5+ years",
+      "deadline": "2026-06-15",
+      "status": "open",
+      "isDeleted": false,
+      "createdAt": "2024-05-10T10:00:00Z",
+      "vacancyCount": 3,
+      "workplaceType": "hybrid",
+      "industry": "Software & Technology",
+      "requiredSkills": ["Angular", "TypeScript", "RxJS"],
+      "isUrgent": true,
+      "isFeatured": true,
+      "companyInfo": { "isVerified": true, "industry": "IT", "companySize": "50-200", "foundedYear": 2015, "overview": "Leading IT firm in BD." },
+      "tags": ["Angular", "Frontend"],
+      "viewCount": 150,
+      "applicantsCount": 5
+    }
+  ],
+  "gigs": [
+    {
+      "id": "g1",
+      "freelancerId": "4",
+      "title": "I will design professional UI/UX for your mobile app",
+      "status": "active",
+      "isDeleted": false,
+      "startingPrice": 5000,
+      "rating": 4.9,
+      "totalOrders": 45,
+      "coverImage": "https://picsum.photos/seed/design/600/400",
+      "images": [],
+      "tags": ["UI/UX", "Mobile", "Figma"],
+      "reviews": [],
+      "faqs": [],
+      "whatYouGet": ["Modern UI", "Interactive Prototype"],
+      "technologies": ["Figma", "Adobe XD"],
+      "viewCount": 200,
+      "savedCount": 15,
+      "responseTime": "1 hour",
+      "publishedDate": "2024-01-10T00:00:00Z",
+      "languages": ["English", "Bengali"]
+    }
+  ],
+  "jobApplications": [
+    {
+      "id": "1",
+      "jobId": "j1",
+      "applicantId": "1",
+      "status": "shortlisted",
+      "appliedAt": "2026-05-10",
+      "coverLetter": "I am a perfect fit for this role..."
+    }
+  ],
+  "orders": [
+    {
+      "id": "o1",
+      "gigId": "g1",
+      "clientId": "1",
+      "freelancerId": "4",
+      "status": "active",
+      "totalAmount": 12000,
+      "createdAt": "2026-05-12T10:00:00Z"
+    }
+  ],
+  "chats": [
+    { "id": "c1", "orderId": "o1", "isActive": true, "createdAt": "2026-05-12T10:05:00Z" }
+  ],
+  "messages": [
+    { "id": "m1", "chatId": "c1", "senderId": "4", "message": "Hello Mahbub!", "status": "read", "createdAt": "2026-05-12T10:10:00Z" }
+  ],
+  "wallets": [
+    { "id": "w1", "userId": "1", "balance": 45000 },
+    { "id": "w2", "userId": "2", "balance": 0 },
+    { "id": "w3", "userId": "3", "balance": 100000 },
+    { "id": "w4", "userId": "4", "balance": 25000 },
+    { "id": "w5", "userId": "5", "balance": 0 }
+  ],
+  "notifications": [
+    { "id": "n1", "userId": "1", "message": "Welcome to WorkBridge!", "type": "system", "isRead": false, "createdAt": "2026-05-16T12:00:00Z" }
+  ],
+  "categories": [
+    { "id": "c1", "name": "Web Development" },
+    { "id": "c2", "name": "Mobile Apps" },
+    { "id": "c3", "name": "Graphic Design" },
+    { "id": "c4", "name": "Digital Marketing" }
+  ],
+  "jobseekerDashboardStats": [
+    { "id": "jds1", "userId": "1", "profileCompletion": 100, "appliedJobs": 1, "profileViews": 142, "interviewInvitations": 3, "savedJobs": 5, "recommendedJobsCount": 8, "applicationsByStatus": [{ "status": "shortlisted", "count": 1 }] }
+  ],
+  "freelancerStats": [
+    { "id": "fs1", "userId": "4", "totalEarnings": 185000, "monthlyEarnings": 42000, "ordersCompleted": 45, "responseRate": 99, "completionRate": 100, "averageRating": 4.9, "weeklyEarnings": [5000, 8000, 4000, 7000, 9000, 3000, 6000] }
+  ],
+  "userReputations": [{ "id": "rep1", "userId": "1", "score": 98, "completedJobs": 5, "completedOrders": 0 }],
+  "userLevels": [{ "id": "ul1", "userId": "4", "freelancerLevel": "topseller", "employerLevel": "basic" }],
+  "analyticsDaily": [],
+  "applicationStatusHistory": [],
+  "badges": [],
+  "dashboardStats": [],
+  "disputeEvidence": [],
+  "disputes": [],
+  "employerStats": [],
+  "files": [],
+  "gigPackages": [
+    { "id": "p1", "gigId": "g1", "name": "basic", "description": "Basic UI design", "price": 5000, "deliveryDays": 3, "revisions": 1, "popular": false, "featureList": [] },
+    { "id": "p2", "gigId": "g1", "name": "standard", "description": "Standard UI/UX", "price": 10000, "deliveryDays": 5, "revisions": 3, "popular": true, "featureList": [] },
+    { "id": "p3", "gigId": "g1", "name": "premium", "description": "Premium Full Pack", "price": 20000, "deliveryDays": 10, "revisions": 999, "popular": false, "featureList": [] }
+  ],
+  "hiringPipeline": [],
+  "interviewRounds": [],
+  "jobAlertNotifications": [],
+  "jobAlerts": [],
+  "jobShortlists": [],
+  "jobSkills": [],
+  "locations": [],
+  "orderDeliveries": [],
+  "orderRevisions": [],
+  "orderStatusHistory": [],
+  "passwordResets": [],
+  "paymentMethods": [],
+  "payments": [],
+  "platformEarnings": [],
+  "ratings": [],
+  "refunds": [],
+  "reports": [],
+  "searchHistory": [],
+  "transactionLogs": [],
+  "transactions": [],
+  "userBadges": [],
+  "userSessions": [],
+  "userSkills": [],
+  "userVerifications": [],
+  "withdrawals": []
+}
