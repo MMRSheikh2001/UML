@@ -1,0 +1,316 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);color:var(--color-text-primary)}
+
+.intro{font-size:12px;color:var(--color-text-secondary);line-height:1.6;padding:0 0 16px}
+
+.group{margin-bottom:24px}
+.group-title{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-tertiary);border-bottom:1px solid var(--color-border-tertiary);padding-bottom:6px;margin-bottom:10px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+
+.card{border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-head{padding:10px 12px 8px;border-left:4px solid var(--accent)}
+.card-num{font-size:10px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:2px}
+.card-name{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.card-table{font-size:10px;color:var(--color-text-tertiary);font-family:var(--font-mono)}
+.card-why{font-size:11px;color:var(--color-text-secondary);padding:6px 12px 8px;line-height:1.5;border-top:1px solid var(--color-border-tertiary)}
+.card-new{display:inline-block;font-size:9px;font-weight:500;padding:1px 6px;border-radius:3px;background:var(--color-background-warning);color:var(--color-text-warning);margin-left:6px;vertical-align:middle}
+.card-missing{border-color:var(--color-border-warning)}
+.card-missing .card-head{background:var(--color-background-warning)}
+
+.fk-list{padding:4px 12px 8px;font-size:10px;color:var(--color-text-tertiary);font-family:var(--font-mono);line-height:1.8}
+.fk-list span{color:var(--color-text-info)}
+
+.summary-box{background:var(--color-background-secondary);border:1px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:20px}
+.summary-row{display:flex;gap:24px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:24px;font-weight:500;color:var(--color-text-primary)}
+.stat-label{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+
+.legend{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap;font-size:11px;color:var(--color-text-secondary);align-items:center}
+.legend-item{display:flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+</style>
+
+<div style="padding:4px 0 0">
+
+<div class="summary-box">
+  <div class="summary-row">
+    <div class="stat"><div class="stat-num">33</div><div class="stat-label">total models</div></div>
+    <div class="stat"><div class="stat-num">9</div><div class="stat-label">were missing before</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">lookup tables</div></div>
+    <div class="stat"><div class="stat-num">66</div><div class="stat-label">services (33×2)</div></div>
+    <div class="stat"><div class="stat-num">1</div><div class="stat-label">db.json collection each</div></div>
+  </div>
+</div>
+
+<div class="legend">
+  <span>Border color = domain:</span>
+  <span class="legend-item"><span class="dot" style="background:#185FA5"></span>Lookup</span>
+  <span class="legend-item"><span class="dot" style="background:#534AB7"></span>Auth/User</span>
+  <span class="legend-item"><span class="dot" style="background:#0F6E56"></span>CV</span>
+  <span class="legend-item"><span class="dot" style="background:#185FA5"></span>Jobs</span>
+  <span class="legend-item"><span class="dot" style="background:#BA7517"></span>Freelance</span>
+  <span class="legend-item"><span class="dot" style="background:#1D9E75"></span>Communication</span>
+  <span class="legend-item"><span class="dot" style="background:#639922"></span>Payments</span>
+  <span class="legend-item"><span class="dot" style="background:#A32D2D"></span>Admin</span>
+  <span class="legend-item"><span class="dot" style="background:#BA7517;border:2px solid #d97706"></span>NEW — was missing</span>
+</div>
+
+<div class="group">
+  <div class="group-title">Lookup tables — static data, loaded once for dropdowns</div>
+  <div class="grid">
+
+    <div class="card card-missing" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">01 — NEW</div><div class="card-name">DivisionModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: divisions</div></div>
+      <div class="card-why">Stores all 8 divisions of Bangladesh. Every address dropdown starts here. Without this table your division dropdown has no data.</div>
+      <div class="fk-list">id?: string &nbsp;|&nbsp; name: string &nbsp;|&nbsp; bnName: string</div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">02 — NEW</div><div class="card-name">DistrictModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: districts</div></div>
+      <div class="card-why">All 64 districts. Each district belongs to one division. When user picks a division, you filter districts by divisionId to populate the next dropdown.</div>
+      <div class="fk-list">id?: string &nbsp;|&nbsp; name: string &nbsp;|&nbsp; <span>divisionId: string</span></div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">03 — NEW</div><div class="card-name">UpazilaModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: upazilas</div></div>
+      <div class="card-why">All 495 upazilas. Each belongs to one district. Used as the deepest level of address selection before postcode and street address.</div>
+      <div class="fk-list">id?: string &nbsp;|&nbsp; name: string &nbsp;|&nbsp; <span>districtId: string</span></div>
+    </div>
+
+    <div class="card" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">04</div><div class="card-name">GigCategoryModel</div><div class="card-table">MySQL table: gig_categories</div></div>
+      <div class="card-why">All service categories — Web Dev, Design, Writing etc. parentId allows subcategories. slug is used in URLs like /gigs/web-development.</div>
+      <div class="fk-list">id?: string &nbsp;|&nbsp; name &nbsp;|&nbsp; slug &nbsp;|&nbsp; <span>parentId: string | null</span> &nbsp;|&nbsp; icon</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Auth and user — the foundation. Every other model references UserModel</div>
+  <div class="grid">
+
+    <div class="card" style="--accent:#534AB7">
+      <div class="card-head"><div class="card-num">05</div><div class="card-name">UserModel</div><div class="card-table">MySQL table: users</div></div>
+      <div class="card-why">Every person on the platform. One account, multiple roles. Status controls access. Address uses the three lookup IDs — no plain city string.</div>
+      <div class="fk-list">id?: string &nbsp;|&nbsp; fullName &nbsp;|&nbsp; email &nbsp;|&nbsp; phone &nbsp;|&nbsp; passwordHash &nbsp;|&nbsp; roles[] &nbsp;|&nbsp; status &nbsp;|&nbsp; <span>divisionId districtId upazilaId</span> &nbsp;|&nbsp; postCode &nbsp;|&nbsp; addressLine &nbsp;|&nbsp; isEmailVerified &nbsp;|&nbsp; isPhoneVerified &nbsp;|&nbsp; createdAt &nbsp;|&nbsp; updatedAt</div>
+    </div>
+
+    <div class="card" style="--accent:#534AB7">
+      <div class="card-head"><div class="card-num">06</div><div class="card-name">OtpModel</div><div class="card-table">MySQL table: otps</div></div>
+      <div class="card-why">One record per OTP sent. The purpose field tells you WHY it was sent — email verify, phone verify, or password reset. isUsed prevents reuse after one successful entry.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; code &nbsp;|&nbsp; purpose &nbsp;|&nbsp; expiresAt &nbsp;|&nbsp; isUsed</div>
+    </div>
+
+    <div class="card" style="--accent:#534AB7">
+      <div class="card-head"><div class="card-num">07</div><div class="card-name">PasswordResetModel</div><div class="card-table">MySQL table: password_resets</div></div>
+      <div class="card-why">When user says forgot password, you generate a secure token and store it here. User clicks the link in their email, you validate this token, they set new password.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; token &nbsp;|&nbsp; expiresAt &nbsp;|&nbsp; isUsed</div>
+    </div>
+
+    <div class="card" style="--accent:#534AB7">
+      <div class="card-head"><div class="card-num">08</div><div class="card-name">NotificationModel</div><div class="card-table">MySQL table: notifications</div></div>
+      <div class="card-why">Every important platform event creates a notification for the relevant user. isRead drives the bell badge count. referenceId links to the thing that caused it.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; type &nbsp;|&nbsp; title &nbsp;|&nbsp; body &nbsp;|&nbsp; isRead &nbsp;|&nbsp; referenceId: string | null</div>
+    </div>
+
+    <div class="card" style="--accent:#534AB7">
+      <div class="card-head"><div class="card-num">09</div><div class="card-name">RatingModel</div><div class="card-table">MySQL table: ratings</div></div>
+      <div class="card-why">A review left after an order completes. Both client and freelancer rate each other. score (1–5) is averaged to show stars on public profiles and gig pages.</div>
+      <div class="fk-list"><span>orderId: string &nbsp;|&nbsp; reviewerId: string &nbsp;|&nbsp; revieweeId: string</span> &nbsp;|&nbsp; targetType &nbsp;|&nbsp; score &nbsp;|&nbsp; comment</div>
+    </div>
+
+    <div class="card" style="--accent:#534AB7">
+      <div class="card-head"><div class="card-num">10</div><div class="card-name">ReportModel</div><div class="card-table">MySQL table: reports</div></div>
+      <div class="card-why">Users report spam jobs, fake gigs, or abusive users. Admin reviews these in the moderation queue. status tracks whether admin has handled it.</div>
+      <div class="fk-list"><span>reporterId: string</span> &nbsp;|&nbsp; targetId &nbsp;|&nbsp; targetType &nbsp;|&nbsp; reason &nbsp;|&nbsp; description &nbsp;|&nbsp; status &nbsp;|&nbsp; adminNote</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">CV / resume — the jobseeker's professional profile. One resumeId links them all</div>
+  <div class="grid">
+
+    <div class="card" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">11</div><div class="card-name">ResumeModel</div><div class="card-table">MySQL table: resumes</div></div>
+      <div class="card-why">The root record. One user can have multiple resumes — different CVs for different job types. isDefault marks which one is used in quick-apply. Everything below links back here via resumeId.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; headline &nbsp;|&nbsp; summary &nbsp;|&nbsp; skills[] &nbsp;|&nbsp; careerLevel &nbsp;|&nbsp; availableFor &nbsp;|&nbsp; expectedSalary &nbsp;|&nbsp; presentSalary &nbsp;|&nbsp; <span>divisionId districtId upazilaId</span> &nbsp;|&nbsp; githubUrl &nbsp;|&nbsp; portfolioUrl &nbsp;|&nbsp; linkedinUrl &nbsp;|&nbsp; cvVisibility &nbsp;|&nbsp; profileCompletion &nbsp;|&nbsp; isDefault</div>
+    </div>
+
+    <div class="card" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">12</div><div class="card-name">EducationModel</div><div class="card-table">MySQL table: educations</div></div>
+      <div class="card-why">One row per degree. Why not store in resume directly? Because MySQL cannot store an array of objects in one column. Each education entry needs its own row so you can add, edit, delete individually.</div>
+      <div class="fk-list"><span>resumeId: string</span> &nbsp;|&nbsp; institution &nbsp;|&nbsp; degree &nbsp;|&nbsp; fieldOfStudy &nbsp;|&nbsp; board &nbsp;|&nbsp; startYear &nbsp;|&nbsp; endYear &nbsp;|&nbsp; result &nbsp;|&nbsp; achievements</div>
+    </div>
+
+    <div class="card" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">13</div><div class="card-name">ExperienceModel</div><div class="card-table">MySQL table: experiences</div></div>
+      <div class="card-why">One row per job held. endDate is null when isCurrentJob is true. The CV builder shows "Present" instead of an end date. responsibilities displays as bullet points.</div>
+      <div class="fk-list"><span>resumeId: string</span> &nbsp;|&nbsp; companyName &nbsp;|&nbsp; jobTitle &nbsp;|&nbsp; department &nbsp;|&nbsp; startDate &nbsp;|&nbsp; endDate &nbsp;|&nbsp; isCurrentJob &nbsp;|&nbsp; responsibilities &nbsp;|&nbsp; achievements</div>
+    </div>
+
+    <div class="card" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">14</div><div class="card-name">CertificationModel</div><div class="card-table">MySQL table: certifications</div></div>
+      <div class="card-why">A credential earned — AWS, Google, Coursera etc. Different from training. Has a credential ID and a URL to verify authenticity. expiryDate null means it never expires.</div>
+      <div class="fk-list"><span>resumeId: string</span> &nbsp;|&nbsp; name &nbsp;|&nbsp; issuingOrganization &nbsp;|&nbsp; issueDate &nbsp;|&nbsp; expiryDate &nbsp;|&nbsp; credentialId &nbsp;|&nbsp; credentialUrl</div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">15 — NEW</div><div class="card-name">TrainingModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: trainings</div></div>
+      <div class="card-why">A course or workshop attended — different from certification. No credential to verify. Common in Bangladesh CVs — people list training programs they attended as professional development.</div>
+      <div class="fk-list"><span>resumeId: string</span> &nbsp;|&nbsp; trainingTitle &nbsp;|&nbsp; institution &nbsp;|&nbsp; duration &nbsp;|&nbsp; completedYear &nbsp;|&nbsp; description</div>
+    </div>
+
+    <div class="card" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">16</div><div class="card-name">ProjectModel</div><div class="card-table">MySQL table: projects</div></div>
+      <div class="card-why">Portfolio projects. technologies is a JSON array. A developer might list 5–10 projects. Each needs its own row so they can be managed individually.</div>
+      <div class="fk-list"><span>resumeId: string</span> &nbsp;|&nbsp; projectName &nbsp;|&nbsp; description &nbsp;|&nbsp; technologies[] &nbsp;|&nbsp; githubUrl &nbsp;|&nbsp; liveUrl &nbsp;|&nbsp; startDate &nbsp;|&nbsp; endDate</div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#0F6E56">
+      <div class="card-head"><div class="card-num">17 — NEW</div><div class="card-name">LanguageModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: languages</div></div>
+      <div class="card-why">Language skills are standard on Bangladesh CVs. Bangla, English, Arabic are common. proficiencyLevel is an enum — Basic, Conversational, Professional, Native. Employers filter candidates by language ability.</div>
+      <div class="fk-list"><span>resumeId: string</span> &nbsp;|&nbsp; languageName &nbsp;|&nbsp; proficiencyLevel</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Job portal — employer posts jobs, jobseeker applies, both track progress</div>
+  <div class="grid">
+
+    <div class="card" style="--accent:#185FA5">
+      <div class="card-head"><div class="card-num">18</div><div class="card-name">JobModel</div><div class="card-table">MySQL table: jobs</div></div>
+      <div class="card-why">A job listing. Every other job-domain model links back here via jobId. status controls visibility — DRAFT means only employer sees it, ACTIVE means public.</div>
+      <div class="fk-list"><span>employerId: string &nbsp;|&nbsp; divisionId districtId upazilaId</span> &nbsp;|&nbsp; title &nbsp;|&nbsp; description &nbsp;|&nbsp; requirements &nbsp;|&nbsp; responsibilities &nbsp;|&nbsp; jobType &nbsp;|&nbsp; experienceLevel &nbsp;|&nbsp; salaryMin &nbsp;|&nbsp; salaryMax &nbsp;|&nbsp; isSalaryNegotiable &nbsp;|&nbsp; skills[] &nbsp;|&nbsp; deadline &nbsp;|&nbsp; status &nbsp;|&nbsp; totalApplications</div>
+    </div>
+
+    <div class="card" style="--accent:#185FA5">
+      <div class="card-head"><div class="card-num">19</div><div class="card-name">JobApplicationModel</div><div class="card-table">MySQL table: job_applications</div></div>
+      <div class="card-why">One record per application. Enforces uniqueness — one person cannot apply to the same job twice. The status field travels through the entire hiring journey from APPLIED to HIRED or REJECTED.</div>
+      <div class="fk-list"><span>jobId: string &nbsp;|&nbsp; applicantId: string &nbsp;|&nbsp; resumeId: string | null</span> &nbsp;|&nbsp; coverLetter &nbsp;|&nbsp; status &nbsp;|&nbsp; appliedAt &nbsp;|&nbsp; updatedAt</div>
+    </div>
+
+    <div class="card" style="--accent:#185FA5">
+      <div class="card-head"><div class="card-num">20</div><div class="card-name">JobAlertModel</div><div class="card-table">MySQL table: job_alerts</div></div>
+      <div class="card-why">A jobseeker saves their search preferences. When a new job is posted, the system compares it against all active alerts. Matching alerts trigger notifications. isActive lets users pause without deleting.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; keyword &nbsp;|&nbsp; jobType &nbsp;|&nbsp; experienceLevel &nbsp;|&nbsp; divisionId &nbsp;|&nbsp; isActive</div>
+    </div>
+
+    <div class="card" style="--accent:#185FA5">
+      <div class="card-head"><div class="card-num">21</div><div class="card-name">HiringPipelineModel</div><div class="card-table">MySQL table: hiring_pipeline</div></div>
+      <div class="card-why">One record per applicant per job. Tracks the current hiring stage. When employer moves someone from SCREENING to INTERVIEW, this record is updated. Powers the Kanban board view.</div>
+      <div class="fk-list"><span>jobId: string &nbsp;|&nbsp; applicantId: string &nbsp;|&nbsp; applicationId: string</span> &nbsp;|&nbsp; stage &nbsp;|&nbsp; updatedAt</div>
+    </div>
+
+    <div class="card" style="--accent:#185FA5">
+      <div class="card-head"><div class="card-num">22</div><div class="card-name">InterviewRoundModel</div><div class="card-table">MySQL table: interview_rounds</div></div>
+      <div class="card-why">One row per interview. Round 1 might be phone, round 2 technical test, round 3 HR. outcome and notes are filled in after the interview happens. meetingLink is null for in-person interviews.</div>
+      <div class="fk-list"><span>applicationId: string</span> &nbsp;|&nbsp; round &nbsp;|&nbsp; type &nbsp;|&nbsp; scheduledAt &nbsp;|&nbsp; location &nbsp;|&nbsp; meetingLink &nbsp;|&nbsp; outcome &nbsp;|&nbsp; notes</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Freelance marketplace — gig creation, ordering, delivery, revision cycle</div>
+  <div class="grid">
+
+    <div class="card" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">23</div><div class="card-name">GigModel</div><div class="card-table">MySQL table: gigs</div></div>
+      <div class="card-why">The service listing. averageRating and totalOrders are computed — not calculated every time you load the page. They are updated when a new rating or completed order is recorded.</div>
+      <div class="fk-list"><span>freelancerId: string &nbsp;|&nbsp; categoryId: string</span> &nbsp;|&nbsp; title &nbsp;|&nbsp; description &nbsp;|&nbsp; tags[] &nbsp;|&nbsp; coverImage &nbsp;|&nbsp; images[] &nbsp;|&nbsp; status &nbsp;|&nbsp; averageRating &nbsp;|&nbsp; totalOrders</div>
+    </div>
+
+    <div class="card" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">24</div><div class="card-name">GigPackageModel</div><div class="card-table">MySQL table: gig_packages</div></div>
+      <div class="card-why">Basic, Standard, Premium tiers. Each has its own price, delivery timeline, revision allowance, and feature list. When a client orders, the packageId is locked into the order so terms cannot change mid-order.</div>
+      <div class="fk-list"><span>gigId: string</span> &nbsp;|&nbsp; name &nbsp;|&nbsp; description &nbsp;|&nbsp; price &nbsp;|&nbsp; deliveryDays &nbsp;|&nbsp; revisions &nbsp;|&nbsp; features[]</div>
+    </div>
+
+    <div class="card" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">25</div><div class="card-name">OrderModel</div><div class="card-table">MySQL table: orders</div></div>
+      <div class="card-why">The central record of the entire freelance workflow. Chat, payment, delivery, dispute, and rating all link back here. platformFee and freelancerEarning are calculated and frozen at the moment of order creation.</div>
+      <div class="fk-list"><span>gigId: string &nbsp;|&nbsp; clientId: string &nbsp;|&nbsp; freelancerId: string &nbsp;|&nbsp; packageId: string</span> &nbsp;|&nbsp; requirements &nbsp;|&nbsp; price &nbsp;|&nbsp; platformFee &nbsp;|&nbsp; freelancerEarning &nbsp;|&nbsp; status &nbsp;|&nbsp; deliveryDeadline &nbsp;|&nbsp; deliveredAt &nbsp;|&nbsp; completedAt &nbsp;|&nbsp; revisionsUsed</div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">26 — NEW</div><div class="card-name">OrderDeliveryModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: order_deliveries</div></div>
+      <div class="card-why">Without this you have no record of WHAT was delivered. When a freelancer clicks Deliver, the files and message they submit are stored here. revisionNumber tracks whether this is the initial delivery or the 2nd revision etc. This is critical for dispute resolution — admin needs to see what was actually delivered.</div>
+      <div class="fk-list"><span>orderId: string</span> &nbsp;|&nbsp; revisionNumber &nbsp;|&nbsp; message &nbsp;|&nbsp; attachments[] &nbsp;|&nbsp; deliveredAt</div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">27 — NEW</div><div class="card-name">RevisionRequestModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: revision_requests</div></div>
+      <div class="card-why">Without this you cannot track WHAT the client asked to change. When client clicks Request Revision, they write what they need changed. This record stores that. The freelancer reads it before re-delivering. Prevents he-said-she-said disputes. Admin uses this as evidence.</div>
+      <div class="fk-list"><span>orderId: string &nbsp;|&nbsp; requestedById: string</span> &nbsp;|&nbsp; revisionNumber &nbsp;|&nbsp; description &nbsp;|&nbsp; requestedAt</div>
+    </div>
+
+    <div class="card" style="--accent:#BA7517">
+      <div class="card-head"><div class="card-num">28</div><div class="card-name">DisputeModel</div><div class="card-table">MySQL table: disputes</div></div>
+      <div class="card-why">Formal complaint when an order goes wrong. Admin reviews the delivery records and revision requests as evidence, then makes a decision. One dispute per order maximum.</div>
+      <div class="fk-list"><span>orderId: string &nbsp;|&nbsp; raisedById: string</span> &nbsp;|&nbsp; reason &nbsp;|&nbsp; description &nbsp;|&nbsp; status &nbsp;|&nbsp; adminNote &nbsp;|&nbsp; resolvedAt</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Communication — messages and notifications keep users informed</div>
+  <div class="grid">
+
+    <div class="card" style="--accent:#1D9E75">
+      <div class="card-head"><div class="card-num">29</div><div class="card-name">MessageModel</div><div class="card-table">MySQL table: messages</div></div>
+      <div class="card-why">Every message is scoped to an order. No free-form chat. This design is intentional — it keeps all communication linked to a business transaction. attachmentType tells the UI how to render the attachment.</div>
+      <div class="fk-list"><span>orderId: string &nbsp;|&nbsp; senderId: string &nbsp;|&nbsp; receiverId: string</span> &nbsp;|&nbsp; content &nbsp;|&nbsp; attachmentUrl &nbsp;|&nbsp; attachmentType &nbsp;|&nbsp; isRead &nbsp;|&nbsp; sentAt</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Payments — every money movement is recorded permanently</div>
+  <div class="grid">
+
+    <div class="card" style="--accent:#639922">
+      <div class="card-head"><div class="card-num">30</div><div class="card-name">WalletModel</div><div class="card-table">MySQL table: wallets</div></div>
+      <div class="card-why">One wallet per user. balance is what you can withdraw. escrowBalance is money locked for active orders — belongs to neither party until order resolves. Created automatically when user registers.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; balance &nbsp;|&nbsp; escrowBalance &nbsp;|&nbsp; currency</div>
+    </div>
+
+    <div class="card" style="--accent:#639922">
+      <div class="card-head"><div class="card-num">31</div><div class="card-name">TransactionModel</div><div class="card-table">MySQL table: transactions</div></div>
+      <div class="card-why">Every money movement creates one immutable row here. You can reconstruct anyone's wallet balance by summing their transactions. Eight types cover every scenario from deposit to platform fee.</div>
+      <div class="fk-list"><span>walletId: string</span> &nbsp;|&nbsp; type &nbsp;|&nbsp; amount &nbsp;|&nbsp; referenceId: string | null &nbsp;|&nbsp; description &nbsp;|&nbsp; createdAt</div>
+    </div>
+
+    <div class="card card-missing" style="--accent:#639922">
+      <div class="card-head"><div class="card-num">32 — NEW</div><div class="card-name">WithdrawalModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: withdrawals</div></div>
+      <div class="card-why">Without this, freelancers have no way to get money out. They submit a withdrawal request specifying amount, payment method (bKash/Nagad/bank), and their account details. Admin approves it. Status tracks PENDING → APPROVED → PROCESSED. This is separate from TransactionModel because it involves an external payment process that takes time.</div>
+      <div class="fk-list"><span>userId: string</span> &nbsp;|&nbsp; amount &nbsp;|&nbsp; method &nbsp;|&nbsp; accountDetails &nbsp;|&nbsp; status &nbsp;|&nbsp; adminNote &nbsp;|&nbsp; processedAt</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Platform administration — controls how the platform itself behaves</div>
+  <div class="grid">
+
+    <div class="card card-missing" style="--accent:#A32D2D">
+      <div class="card-head"><div class="card-num">33 — NEW</div><div class="card-name">PlatformSettingModel <span class="card-new">missing</span></div><div class="card-table">MySQL table: platform_settings</div></div>
+      <div class="card-why">Where does your 10% commission rate live? Where do you store whether new gig registration is open or closed? Without this model, every business rule is hardcoded in the Angular app and changing it requires a code deployment. PlatformSettingModel stores key-value pairs that admin can change from a dashboard — commission rate, minimum withdrawal amount, maintenance mode toggle, maximum revision count per order.</div>
+      <div class="fk-list">key: string &nbsp;|&nbsp; value: string &nbsp;|&nbsp; description &nbsp;|&nbsp; updatedAt &nbsp;|&nbsp; <span>updatedById: string</span></div>
+    </div>
+
+  </div>
+</div>
+
+</div>
